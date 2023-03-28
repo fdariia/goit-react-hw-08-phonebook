@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './operations';
+import { fetchContacts, addContact, deleteContact } from './phoneBookOperations';
+import { logOut } from 'redux/auth/authOperations';
 
 const INITIAL_PHONEBOOK_STATE = {
   contacts: {
@@ -64,20 +65,12 @@ const phoneBookSlice = createSlice({
       state.contacts.isLoading = false;
       state.contacts.error = action.payload;
     },
+    [logOut.fulfilled](state){
+      state.contacts.items = [];
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+    }
   },
-  // reducers: {
-  //   addContact(state, { payload: newContact }) {
-  //     state.contacts.push(newContact);
-  //   },
-  //   deleteContact(state, { payload: contactId }) {
-  //     state.contacts = state.contacts.filter(
-  //       contact => contact.id !== contactId
-  //     );
-  //   },
-  //   filterContacts(state, { payload: filterValue }) {
-  //     state.filter = filterValue;
-  //   },
-  // },
 });
 
 export const { filterContacts } = phoneBookSlice.actions;
