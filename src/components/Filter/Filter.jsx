@@ -6,10 +6,10 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   return (
-    <label className={css.filter}>
+    <label className={css.label}>
       Find contacts by name
       <input
-        className={css.filterInput}
+        className={css.input}
         type="text"
         onChange={evt => dispatch(filterContacts(evt.currentTarget.value))}
       />
