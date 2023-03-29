@@ -25,7 +25,7 @@ export default function LoginPage() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(logIn({ email, password }));
-    navigate('/');
+    navigate('/contacts');
     setEmail('');
     setPassword('');
   };

@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { register } from 'redux/auth/authOperations';
 import css from './RegisterPage.module.css';
 
 export default function RegisterView() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +28,7 @@ export default function RegisterView() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(register({ name, email, password }));
+    navigate('/contacts');
     setName('');
     setEmail('');
     setPassword('');
