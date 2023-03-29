@@ -2,3 +2,8 @@
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.title,
+.subtitle {
+  margin-bottom: 20px;
+}
