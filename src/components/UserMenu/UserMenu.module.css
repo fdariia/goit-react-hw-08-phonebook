@@ -1,16 +1,11 @@
-.list {
+.container {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 500px;
-  padding: 0;
-  list-style: none;
+  align-items: center;
 }
 
-.item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.name {
+  font-weight: bold;
+  margin-right: 20px;
 }
 
 .button {

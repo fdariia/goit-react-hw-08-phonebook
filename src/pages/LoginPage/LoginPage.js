@@ -1,20 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { logIn } from 'redux/auth/authOperations';
+import css from './LoginPage.module.css'
 
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
-
-export default function LoginView() {
+export default function LoginPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,36 +25,39 @@ export default function LoginView() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(logIn({ email, password }));
+    navigate('/');
     setEmail('');
     setPassword('');
   };
 
   return (
-    <div>
-      <h1>Страница логина</h1>
+    <div className={css.section}>
+      <h1 className={css.title}>Login</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
-          Почта
-          <input
+      <form onSubmit={handleSubmit} className={css.form} autoComplete="off">
+        <label className={css.label}>
+        Email
+          <input className={css.input}
             type="email"
             name="email"
             value={email}
+            placeholder='Email'
             onChange={handleChange}
           />
         </label>
 
-        <label style={styles.label}>
-          Пароль
-          <input
+        <label className={css.label}>
+          Password
+          <input className={css.input}
             type="password"
             name="password"
             value={password}
+            placeholder='Password'
             onChange={handleChange}
           />
         </label>
 
-        <button type="submit">Войти</button>
+        <button className={css.button} type="submit">Log in</button>
       </form>
     </div>
   );

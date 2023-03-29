@@ -11,13 +11,13 @@ const ContactList = () => {
   const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase().trim()));
 
   return (
-    <ul className={css.contactList}>
+    <ul className={css.list}>
       {filteredContacts.map(({ id, name, number }) => (
-        <li className={css.contactListItem} key={id}>
+        <li className={css.item} key={id}>
           <span>{name}</span>
           <span>{number}</span>
           <button
-            className={css.contactListButton}
+            className={css.button}
             onClick={() => dispatch(deleteContact(id))}
           >
             Delete

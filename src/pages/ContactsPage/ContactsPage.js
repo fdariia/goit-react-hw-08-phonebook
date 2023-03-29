@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
+import css from './ContactsPage.module.css';
 
 import { fetchContacts } from 'redux/contacts/phoneBookOperations';
 import { getError, getIsLoading } from 'redux/contacts/phoneBookSelectors';
@@ -18,7 +19,7 @@ const ContactsPage = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={css.section}>
       <h1>Phonebook</h1>
       <ContactForm />
 

@@ -1,4 +1,4 @@
-.form {
+/* .form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -31,4 +31,49 @@
   color: rgb(0, 0, 255);
   background-color: rgb(254, 254, 254);
   border: 1px solid rgb(0, 0, 255);
+} */
+
+.section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.form {
+  width: 300px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  color: #659dbd;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button:hover,
+.buton:focus {
+  color: #ffffff;
+  background-color: #659dbd;
+  border: 2px solid #ffffff;
 }

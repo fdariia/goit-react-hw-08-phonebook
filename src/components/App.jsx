@@ -1,32 +1,63 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AppBar from './AppBar';
-import { useDispatch } from 'react-redux';
-import { fetchCurrentUser } from 'redux/auth/authOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshUser } from 'redux/auth/authOperations';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import { getIsRefreshing } from 'redux/auth/authSelectors';
+import css from './App.module.css';
 
-const HomePage = lazy(() => import('pages/HomePage'));
-const RegisterPage = lazy(() => import('pages/RegisterPage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
-const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const SharedLayout = lazy(() => import('components/SharedLayout'));
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 
 function App() {
   const dispatch = useDispatch();
+
+  const isRefreshing = useSelector(getIsRefreshing);
+
   useEffect(() => {
-    dispatch(fetchCurrentUser());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
-    <div>
-      <AppBar />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
-        </Routes>
-      </Suspense>
-    </div>
+    !isRefreshing && (
+      <div className={css.rootApp}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<SharedLayout />}>
+              <Route index element={<HomePage />} />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute>
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute>
+                    <ContactsPage />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+          </Routes>
+        </Suspense>
+      </div>
+    )
   );
 }
 

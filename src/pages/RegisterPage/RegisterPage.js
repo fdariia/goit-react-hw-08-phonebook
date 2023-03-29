@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
-
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
+import css from './RegisterPage.module.css';
 
 export default function RegisterView() {
   const dispatch = useDispatch();
@@ -41,36 +31,47 @@ export default function RegisterView() {
   };
 
   return (
-    <div>
-      <h1>Страница регистрации</h1>
+    <div className={css.section}>
+      <h1 className={css.title}>Registration</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
+      <form onSubmit={handleSubmit} className={css.form} autoComplete="off">
+        <label className={css.label}>
+          Name
+          <input
+            className={css.input}
+            type="text"
+            name="name"
+            value={name}
+            placeholder='Username'
+            onChange={handleChange}
+          />
         </label>
 
-        <label style={styles.label}>
-          Почта
+        <label className={css.label}>
+          Email
           <input
+            className={css.input}
             type="email"
             name="email"
             value={email}
+            placeholder='Email'
             onChange={handleChange}
           />
         </label>
 
-        <label style={styles.label}>
-          Пароль
+        <label className={css.label}>
+          Password
           <input
+            className={css.input}
             type="password"
             name="password"
             value={password}
+            placeholder='Password'
             onChange={handleChange}
           />
         </label>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button className={css.button} type="submit">Register</button>
       </form>
     </div>
   );
